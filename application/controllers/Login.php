@@ -46,7 +46,7 @@ class Login extends CI_Controller {
 						redirect("panel", "refresh");
 					}
 				}else{
-					Utilerias::set_flash_message($this, MESSAGE_ERROR, 'Sus datos son incorrectos');
+					Utilerias::set_flash_message($this, MESSAGE_ERROR, 'Datos incorrectos');
 					redirect('login', 'refresh');
 				}
 			}
@@ -65,7 +65,7 @@ class Login extends CI_Controller {
 		$this->form_validation->set_rules('itxt_login_clave', 'contraseña', 'required', array('required' => 'Ingrese su %s'));
 		// return $this->form_validation->run();
 		if (!$this->form_validation->run()) {
-			Utilerias::set_flash_message($this, MESSAGE_ERROR, 'Atienda los siguientes errores');
+			Utilerias::set_flash_message($this, MESSAGE_ERROR, 'Atienda los errores');
 			$data['array_errors'] = $this->form_validation->error_array();
 			$this->load->view('login/index', $data);
 		} else {

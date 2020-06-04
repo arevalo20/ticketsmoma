@@ -15,9 +15,9 @@
     </form>
   </div>
 
-  <?php if ($idtipousuario == USUARIO_TIPO_SISTEMAS){ ?>
-    <?= form_open('Reporte/actividades', array("id"=>"form_reporte_xmes", "target"=>"_blank")); ?>
-      <div class="form-group">
+  <?php if ($idtipousuario == USUARIO_TIPO_SISTEMAS) { ?>
+    <?= form_open('Reporte/actividades', array("id" => "form_reporte_xmes", "target" => "_blank")); ?>
+    <div class="form-group">
       <div class="row">
         <div class="col-8 col-sm-8 col-md-6 col-lg-6">
           <label>Reporte de actividades por mes</label>

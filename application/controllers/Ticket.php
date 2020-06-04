@@ -319,7 +319,7 @@ class Ticket extends CI_Controller
 		$this->form_validation->set_rules('ifile_ticket_img', 'archivo', "callback_imagen_valida");
 
 		if (!$this->form_validation->run()) {
-		// Utilerias::set_flash_message($this, MESSAGE_ERROR, 'Atienda los siguientes errores');
+		// Utilerias::set_flash_message($this, MESSAGE_ERROR, 'Atienda los errores');
 			$data['array_errors'] = $this->form_validation->error_array();
 
 		// $data = array();
