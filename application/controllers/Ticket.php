@@ -24,18 +24,18 @@ class Ticket extends CI_Controller
 			$this->user_logueado = $this->array_user_session->seguridad['nombre'] . ' ' .
 				$this->array_user_session->seguridad['apellido1'] . ' ' .
 				$this->array_user_session->seguridad['apellido2'] . '[' . $this->array_user_session->seguridad['tipousuario'] . ']';
-		}// verifica_session_redirige
+		} // verifica_session_redirige
 
 		$this->idkey = "idticket";
 		$this->arr_columnas_grid =
 			array(
-			"idticket" => array("type" => "hidden", "header" => "ID", "width" => "5%"),
-			"titulo" => array("type" => "text", "header" => "Título", "width" => "85%"),
-			"seccion" => array("type" => "text", "header" => "Sección", "width" => "85%"),
-			"prioridad" => array("type" => "text", "header" => "Prioridad", "width" => "85%")
+				"idticket" => array("type" => "hidden", "header" => "ID", "width" => "5%"),
+				"titulo" => array("type" => "text", "header" => "Título", "width" => "85%"),
+				"seccion" => array("type" => "text", "header" => "Sección", "width" => "85%"),
+				"prioridad" => array("type" => "text", "header" => "Prioridad", "width" => "85%")
 
 
-		);
+			);
 
 		if (true) {
 			$this->arr_columnas_grid['ver_detalles'] = array(
@@ -54,7 +54,7 @@ class Ticket extends CI_Controller
 
 		$this->grid = new Grid();
 
-		$this->arr_prioridades = (object)array(
+		$this->arr_prioridades = (object) array(
 			array('idprioridad' => 'N', 'prioridad' => 'NORMAL'),
 			array('idprioridad' => 'U', 'prioridad' => 'URGENTE')
 		);
@@ -69,18 +69,18 @@ class Ticket extends CI_Controller
 		);
 
 
-	//
+		//
 		$this->idkey = "idticket";
 		$this->arr_columnas_grid =
 			array(
-			"idticket" => array("type" => "text", "header" => "Ticket", "width" => "5%"),
-			"titulo" => array("type" => "text", "header" => "Título", "width" => "40%"),
-			"seccion" => array("type" => "text", "header" => "Sección", "width" => "10%"),
-			"prioridad" => array("type" => "text", "header" => "Prioridad", "width" => "10%"),
-			"estatus" => array("type" => "text_class", "header" => "Estatus", "width" => "10%"),
-			"fcreacion" => array("type" => "datetime", "header" => "Fecha de registro", "width" => "25%")
+				"idticket" => array("type" => "text", "header" => "Ticket", "width" => "5%"),
+				"titulo" => array("type" => "text", "header" => "Título", "width" => "40%"),
+				"seccion" => array("type" => "text", "header" => "Sección", "width" => "10%"),
+				"prioridad" => array("type" => "text", "header" => "Prioridad", "width" => "10%"),
+				"estatus" => array("type" => "text_class", "header" => "Estatus", "width" => "10%"),
+				"fcreacion" => array("type" => "datetime", "header" => "Fecha de registro", "width" => "25%")
 
-		);
+			);
 
 		if (true) {
 			$this->arr_columnas_grid['ver_detalles'] = array(
@@ -103,10 +103,9 @@ class Ticket extends CI_Controller
 					'tooltip' => 'Ver / escribir una respuesta'
 				)
 			);
-
 		}
 
-// echo "<pre>";  print_r($this->array_user_session->seguridad['idtipousuario']); die();
+		// echo "<pre>";  print_r($this->array_user_session->seguridad['idtipousuario']); die();
 		if (($this->array_user_session->seguridad['idtipousuario'] == USUARIO_TIPO_SISTEMAS) || ($this->array_user_session->seguridad['idtipousuario'] == USUARIO_TIPO_ADMINISTRADOR)) {
 			$this->arr_columnas_grid['autorizar_ticket'] = array(
 				"type" => "button", "header" => "", "width" => "5%",
@@ -134,20 +133,19 @@ class Ticket extends CI_Controller
 		}
 
 		$this->grid = new Grid();
-
-	}// __construct()
+	} // __construct()
 
 	public function index()
 	{
 		if (Utilerias::verifica_session_redirige($this)) {
-		// echo "panel";
+			// echo "panel";
 			$data = array();
 			// echo "<pre>"; print_r($this->array_user_session->seguridad['idtipousuario']); die();
 			$total_datos = $this->Ticket_model->get('', -1, -1);
 			$this->grid->set_configs_paginador($this->arr_columnas_grid, $this->idkey, GRID_THEME, $total_datos, VALORES_XPAGINA);
 			$offset = $this->grid->get_offset($_POST);
 			$array_tickets = $this->Ticket_model->get('', $offset, VALORES_XPAGINA);
-		// echo "<pre>"; print_r($array_tickets); die();
+			// echo "<pre>"; print_r($array_tickets); die();
 			$this->grid->set_data($array_tickets);
 			$str_grid = $this->grid->get_table();
 
@@ -155,8 +153,8 @@ class Ticket extends CI_Controller
 			$data['str_grid'] = $str_grid;
 
 			Utilerias::load_page_backend($this, 'ticket/index', $data);
-		}// verifica_sesion_redirige
-	}// index()
+		} // verifica_sesion_redirige
+	} // index()
 
 	public function get_gridpaginador()
 	{
@@ -168,7 +166,7 @@ class Ticket extends CI_Controller
 			$this->grid->set_configs_paginador($this->arr_columnas_grid, $this->idkey, GRID_THEME, $total_datos, VALORES_XPAGINA);
 			$offset = $this->grid->get_offset($_POST);
 			$array_tickets = $this->Ticket_model->get('', $offset, VALORES_XPAGINA);
-		// echo "<pre>"; print_r($array_tickets); die();
+			// echo "<pre>"; print_r($array_tickets); die();
 			$this->grid->set_data($array_tickets);
 			$str_grid = $this->grid->get_table();
 
@@ -176,7 +174,7 @@ class Ticket extends CI_Controller
 			Utilerias::envia_datos_json(200, $response, $this);
 			exit;
 		}
-	}// get_gridpaginador()
+	} // get_gridpaginador()
 
 	public function autorizar()
 	{
@@ -186,7 +184,7 @@ class Ticket extends CI_Controller
 
 
 			$array_ticket = $this->Ticket_model->get_xidticket($idticket);
-		// echo "<pre>"; print_r($array_ticket); die();
+			// echo "<pre>"; print_r($array_ticket); die();
 			$tipo_error = '';
 			if ($array_ticket['idestatus'] == ESTATUS_RESUELTA) {
 				$result = false;
@@ -202,7 +200,7 @@ class Ticket extends CI_Controller
 			Utilerias::envia_datos_json(200, $response, $this);
 			exit;
 		}
-	}// autorizar()
+	} // autorizar()
 
 	public function solucionar()
 	{
@@ -211,7 +209,7 @@ class Ticket extends CI_Controller
 
 
 			$array_ticket = $this->Ticket_model->get_xidticket($idticket);
-		// echo "<pre>"; print_r($array_ticket); die();
+			// echo "<pre>"; print_r($array_ticket); die();
 			$tipo_error = '';
 			if ($array_ticket['idestatus'] == ESTATUS_PENDIENTE) {
 				$result = false;
@@ -229,7 +227,7 @@ class Ticket extends CI_Controller
 			Utilerias::envia_datos_json(200, $response, $this);
 			exit;
 		}
-	}// solucionar()
+	} // solucionar()
 
 
 	public function detalles($idticket)
@@ -239,10 +237,11 @@ class Ticket extends CI_Controller
 			$data['array_ticket'] = $this->Ticket_model->get_xidticket($idticket);
 
 			Utilerias::load_page_backend($this, 'ticket/detalles', $data);
-		}// verifica_sesion_redirige
-	}// detalles()
+		} // verifica_sesion_redirige
+	} // detalles()
 
-	public function respuestas($idticket){
+	public function respuestas($idticket)
+	{
 		if (Utilerias::verifica_session_redirige($this)) {
 			$data = array();
 			$data['array_ticket'] = $this->Ticket_model->get_xidticket($idticket);
@@ -251,23 +250,23 @@ class Ticket extends CI_Controller
 			$data['idticket'] = $idticket;
 			// echo "<pre>"; print_r($this->array_user_session->seguridad['idusuario']); die();
 			Utilerias::load_page_backend($this, 'ticket/respuestas', $data);
-		}// verifica_sesion_redirige
-	}// respuestas()
+		} // verifica_sesion_redirige
+	} // respuestas()
 
 	public function create()
 	{
 		if (Utilerias::verifica_session_redirige($this)) {
-		// $data['array_marca'] = $this->array_marca;
-		// $data['title'] = 'Nueva marca';
-		// $data['user_logueado'] = $this->user_logueado;
+			// $data['array_marca'] = $this->array_marca;
+			// $data['title'] = 'Nueva marca';
+			// $data['user_logueado'] = $this->user_logueado;
 			$data = array();
 			$data['array_ticket'] = $this->array_ticket;
 			$data['array_secciones'] = $this->Seccion_model->get();
 			$data['array_prioridades'] = $this->arr_prioridades;
-		// echo "<pre>"; print_r($data); die();
+			// echo "<pre>"; print_r($data); die();
 			Utilerias::load_page_backend($this, 'ticket/create', $data);
-		}// verifica_session_redirige
-	}// create()
+		} // verifica_session_redirige
+	} // create()
 
 	public function save()
 	{
@@ -284,7 +283,7 @@ class Ticket extends CI_Controller
 			);
 
 			if ($this->form_validation_ticket()) {
-			// echo "VALIDO";
+				// echo "VALIDO";
 				if ($idticket == 0) {
 					$action = "creado";
 					$idticket_insert = $this->Ticket_model->create($this->array_ticket, $this->array_user_session->seguridad['idusuario']);
@@ -304,8 +303,8 @@ class Ticket extends CI_Controller
 				Utilerias::set_flash_message($this, $type_message, $message);
 				redirect("panel", "refresh");
 			}
-		}// verifica_session_redirige
-	}// save()
+		} // verifica_session_redirige
+	} // save()
 
 
 
@@ -319,19 +318,19 @@ class Ticket extends CI_Controller
 		$this->form_validation->set_rules('ifile_ticket_img', 'archivo', "callback_imagen_valida");
 
 		if (!$this->form_validation->run()) {
-		// Utilerias::set_flash_message($this, MESSAGE_ERROR, 'Atienda los errores');
+			// Utilerias::set_flash_message($this, MESSAGE_ERROR, 'Atienda los errores');
 			$data['array_errors'] = $this->form_validation->error_array();
 
-		// $data = array();
+			// $data = array();
 			$data['array_ticket'] = $this->array_ticket;
 			$data['array_secciones'] = $this->Seccion_model->get();
 			$data['array_prioridades'] = $this->arr_prioridades;
-		// echo "<pre>"; print_r($data); die();
+			// echo "<pre>"; print_r($data); die();
 			Utilerias::load_page_backend($this, 'ticket/create', $data);
 		} else {
 			return true;
 		}
-	}// form_validation_armazon()
+	} // form_validation_armazon()
 
 	public function imagen_valida()
 	{
@@ -346,15 +345,15 @@ class Ticket extends CI_Controller
 		);
 
 		$idarmazon = $this->input->post('itxt_armazon_idarmazon');
-	// if($_FILES['ifile_armazon_imagen']['error']==4 && $idarmazon>0){} // UTIL CUANDO ERA REQUERIDA LA IMAGEN. NO subió imagen Y ESTÁ ACTUALIZANDO DATOS DE ARMAZON, no hay problema
+		// if($_FILES['ifile_armazon_imagen']['error']==4 && $idarmazon>0){} // UTIL CUANDO ERA REQUERIDA LA IMAGEN. NO subió imagen Y ESTÁ ACTUALIZANDO DATOS DE ARMAZON, no hay problema
 		if ($_FILES['ifile_ticket_img']['error'] == 4) { // NO subió imagen Y ESTÁ ACTUALIZANDO DATOS DE ARMAZON, no hay problema
-		// return TRUE;
+			// return TRUE;
 			$this->form_validation->set_message('imagen_valida', 'Seleccione una imagen JPG, PNG o GIF');
 			return false;
 		} else {
-		#####
+			#####
 			if ($_FILES['ifile_ticket_img']['error'] == 0) { // No hay error al cargar el archivo, vamos a procesar
-			/////////////////////
+				/////////////////////
 				$file_type = $_FILES["ifile_ticket_img"]["type"];
 				if ($file_type != "image/jpg" && $file_type != "image/png" && $file_type != "image/jpeg" && $file_type != "image/gif") {
 					$this->form_validation->set_message('imagen_valida', 'Formato de archivo no valido, selecione una imagen: JPG, PNG o GIF');
@@ -362,30 +361,30 @@ class Ticket extends CI_Controller
 				} else {
 					return true;
 				}
-			////////////////////
+				////////////////////
 			} else {
 				$error_message = $error_types_file[$_FILES['ifile_ticket_img']['error']];
 				$this->form_validation->set_message('imagen_valida', $error_message);
 				return false;
-			}// else tipos de error
-		#####
-		}// else
-	}// imagen_valida()
+			} // else tipos de error
+			#####
+		} // else
+	} // imagen_valida()
 
 	private function upload_image($idticket)
 	{
-	// echo "<pre>"; print_r(); die();
+		// echo "<pre>"; print_r(); die();
 		$name_aux = $_FILES['ifile_ticket_img']['name'];
 		$tmp_name = $_FILES['ifile_ticket_img']['tmp_name'];
-	// echo $name_aux; die();
+		// echo $name_aux; die();
 		$dir_subida = "archivos/imagenes/tickets/" . $idticket . "/";
 
 		$array_partes_img = explode('.', $name_aux);
 		$extension = $array_partes_img[1];
-	// echo "<pre>"; print_r($array_partes_img); die();
+		// echo "<pre>"; print_r($array_partes_img); die();
 		$nombre_file = "ticket_" . $idticket . "." . $extension;
 
-	// echo $nombre_file; die();
+		// echo $nombre_file; die();
 
 		$fichero_subir = $dir_subida . $nombre_file;
 		if (file_exists($dir_subida)) {
@@ -403,12 +402,13 @@ class Ticket extends CI_Controller
 				}
 			}
 		}
-	}// upload_image();
+	} // upload_image();
 
-	public function guardar_mensaje(){
+	public function guardar_mensaje()
+	{
 		if (Utilerias::verifica_session_redirige($this)) {
 
-			$array_mensaje= array(
+			$array_mensaje = array(
 				"idticket" => $this->input->post('idticket'),
 				"mensaje" => trim($this->input->post('mensaje')),
 				"idusuario" => $this->array_user_session->seguridad['idusuario']
@@ -419,8 +419,23 @@ class Ticket extends CI_Controller
 			$type_message = ($result) ? MESSAGE_SUCCESS : MESSAGE_ERROR;
 			$message = ($result) ? "Respuesta guardada correctamente" : "Ocurrió un error, reintente por favor";
 			Utilerias::set_flash_message($this, $type_message, $message);
-			redirect("tickets/respuestas/".$this->input->post('idticket'), "refresh");
-		}// verifica_session_redirige
-	}// guardar_mensaje()
+			redirect("tickets/respuestas/" . $this->input->post('idticket'), "refresh");
+		} // verifica_session_redirige
+	} // guardar_mensaje()
 
+
+
+
+	// usuaarios
+	public function usuarios()
+	{
+		if (Utilerias::verifica_session_redirige($this)) {
+			$data = array();
+			$data['array_ticket'] = $this->array_ticket;
+			$data['array_secciones'] = $this->Seccion_model->get();
+			$data['array_prioridades'] = $this->arr_prioridades;
+			// echo "<pre>"; print_r($data); die();
+			Utilerias::load_page_backend($this, 'ticket/usuarios', $data);
+		} // verifica_session_redirige
+	} // usuarios()
 }// class

@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -62,6 +62,9 @@ $route['ticket/nuevo'] = 'Ticket/create';
 $route['ticket/guardar'] = 'Ticket/save';
 $route['tickets/respuestas/(:num)'] = 'Ticket/respuestas/$1';
 $route['ticket/guardar_mensaje'] = 'Ticket/guardar_mensaje';
+
+
+$route['ticket/usuarios'] = 'Ticket/usuarios';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
